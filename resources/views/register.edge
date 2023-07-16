@@ -1,0 +1,61 @@
+@layout('layouts.master')
+
+@section('title')
+Register | Adonis Todo App
+@endsection
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                @if(flashMessage('successMessage'))
+                <div class="alert alert-success mb-4">{{ flashMessage('successMessage') }}</div>
+                @endif
+
+                <div class="card mt-5">
+                    <div class="card-header">Register</div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('register.store') }}">
+                            {{ csrfField() }}
+
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-4 col-fotm-label text-ms-right">E-Mail Address</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="email" name="email" value="{{ old('email') }}" class="form-control">
+                                    @if(hasErrorFor('email'))
+                                    <div class="alert alert-danger mb-2 mt-2">{{ getErrorFor('email') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-4 col-fotm-label text-ms-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" name="password" value="{{ old('password') }}" class="form-control">
+                                    @if(hasErrorFor('password'))
+                                    <div class="alert alert-danger mb-2 mt-2">{{ getErrorFor('password') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password_confirmation" class="col-sm-4 col-fotm-label text-ms-right">Re Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control">
+                                    @if(hasErrorFor('password_confirmation'))
+                                    <div class="alert alert-danger mb-2 mt-2">{{ getErrorFor('password_confirmation') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="d-flex" style="justify-content: center;">
+                                <button class="btn btn-primary" type="submit" style="font-size: 12px;">Register</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
